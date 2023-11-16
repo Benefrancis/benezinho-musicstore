@@ -22,7 +22,7 @@ public record MusicDTO(
     public static Music of(MusicDTO dto) {
 
         // É nulo?
-        if (Objects.isNull( dto )) return null;
+        if (Objects.isNull( dto )) throw new RuntimeException( "Objeto DTO não pode estar nulo. Verifique se  incluiu o Json no Body na requisição" );
 
         //Ele informou o id do produto?
         if (Objects.nonNull( dto.id )) return service.findById( dto.id );

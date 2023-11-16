@@ -32,7 +32,7 @@ public class MusicResource implements Resource<MusicDTO, Long> {
     @Override
     public Response findById(@PathParam("id") Long id) {
         Music entity = service.findById( id );
-        if (Objects.isNull( entity )) return Response.status( 404 ).build();
+        if (Objects.isNull( entity )) throw new RuntimeException( "Não foi possível consultar o artista com id: " + id );
         return Response.ok( MusicDTO.of( entity ) ).build();
     }
 
@@ -43,7 +43,7 @@ public class MusicResource implements Resource<MusicDTO, Long> {
 
         Music persisted = service.persist( MusicDTO.of( dto ) );
 
-        if (Objects.isNull( persisted )) return Response.status( 400 ).build();
+        if (Objects.isNull( persisted )) throw new RuntimeException( "Não foi possível persistir a musica" );
 
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
         URI uri = uriBuilder.path( String.valueOf( persisted.getId() ) ).build();

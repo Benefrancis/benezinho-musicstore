@@ -2,6 +2,7 @@ package br.com.fiap;
 
 import br.com.fiap.infra.ConnectionFactory;
 import br.com.fiap.infra.configuration.cors.CORSFilter;
+import br.com.fiap.infra.configuration.exception.ExceptionHandling;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -17,6 +18,10 @@ public class Main {
         final ResourceConfig rc = new ResourceConfig()
                 // Configure container response filters (CORSFilter)
                 .register( CORSFilter.class )
+
+                // Configure ExceptionHandling (ExceptionHandling)
+                .register( ExceptionHandling.class )
+
                 // Configure ConnectionFactory
                 .register( ConnectionFactory.build() )
                 // Configure os pacotes em que temos Recursos da API REST

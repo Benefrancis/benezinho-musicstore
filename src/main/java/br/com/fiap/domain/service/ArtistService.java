@@ -25,7 +25,7 @@ public class ArtistService implements Service<Artist, Long> {
         //Não pode ter Genero com mesmo nome
         var g = repo.findByName( artist.getName() );
         if (Objects.nonNull( g )){
-            System.err.println("Já existe genero cadastrado com o mesmo nome: " + g.getName());
+            System.err.println("Já existe artista cadastrado com o mesmo nome: " + g.getName());
             return g;
         }
         return repo.persist( artist );

@@ -12,7 +12,7 @@ public record ArtistDTO(Long id, String name, String nationality) {
     public static Artist of(ArtistDTO dto) {
 
         // É nulo?
-        if (Objects.isNull( dto )) return null;
+        if (Objects.isNull( dto )) throw new RuntimeException( "Objeto DTO não pode estar nulo. Verifique se  incluiu o Json no Body na requisição" );
 
         //Ele informou o id?
         if (Objects.nonNull( dto.id )) return service.findById( dto.id );

@@ -40,6 +40,7 @@ public class ConnectionFactory {
             return dataSource.getConnection();
         } catch (SQLException e) {
             System.err.println( "Não foi possível realizar a conexão com o banco de dados: " + e.getMessage() );
+
         }
         return null;
     }

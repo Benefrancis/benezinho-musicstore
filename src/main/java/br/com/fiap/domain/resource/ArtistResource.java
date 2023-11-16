@@ -32,8 +32,8 @@ public class ArtistResource implements Resource<ArtistDTO, Long> {
     @Override
     public Response findById(@PathParam("id") Long id) {
         Artist entity = service.findById( id );
-        if (Objects.isNull( entity )) return Response.status( 404 ).build();
-        return Response.ok( ArtistDTO.of( entity) ).build();
+        if (Objects.isNull( entity )) throw new RuntimeException( "Não temos artista cadastrado com o id: " + id );
+        return Response.ok( ArtistDTO.of( entity ) ).build();
     }
 
 
@@ -41,13 +41,13 @@ public class ArtistResource implements Resource<ArtistDTO, Long> {
     @Override
     public Response persist(ArtistDTO dto) {
 
-        Artist persisted = service.persist( ArtistDTO.of( dto) );
+        Artist persisted = service.persist( ArtistDTO.of( dto ) );
 
-        if (Objects.isNull(persisted)) return Response.status(400).build();
+        if (Objects.isNull( persisted )) throw new RuntimeException( "Não foi possível persistir o artista" );
 
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
-        URI uri = uriBuilder.path(String.valueOf(persisted.getId())).build();
+        URI uri = uriBuilder.path( String.valueOf( persisted.getId() ) ).build();
 
-        return Response.created(uri).entity( ArtistDTO.of(persisted)).build();
+        return Response.created( uri ).entity( ArtistDTO.of( persisted ) ).build();
     }
 }
