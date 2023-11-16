@@ -3,11 +3,15 @@ package br.com.fiap.domain.dto;
 import br.com.fiap.domain.entity.Music;
 import br.com.fiap.domain.service.ArtistService;
 import br.com.fiap.domain.service.MusicService;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
 public record MusicDTO(
         Long id,
+        @NotEmpty(message = "O Nome da música não pode estar vazio")
+        @NotNull(message = "O Nome da música deve ser informado")
         String title,
         ArtistDTO artist,
         String style,
@@ -22,7 +26,8 @@ public record MusicDTO(
     public static Music of(MusicDTO dto) {
 
         // É nulo?
-        if (Objects.isNull( dto )) throw new RuntimeException( "Objeto DTO não pode estar nulo. Verifique se  incluiu o Json no Body na requisição" );
+        if (Objects.isNull( dto ))
+            throw new RuntimeException( "Objeto DTO não pode estar nulo. Verifique se  incluiu o Json no Body na requisição" );
 
         //Ele informou o id do produto?
         if (Objects.nonNull( dto.id )) return service.findById( dto.id );

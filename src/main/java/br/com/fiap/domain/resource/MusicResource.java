@@ -3,6 +3,8 @@ package br.com.fiap.domain.resource;
 import br.com.fiap.domain.dto.MusicDTO;
 import br.com.fiap.domain.entity.Music;
 import br.com.fiap.domain.service.MusicService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
@@ -38,8 +40,8 @@ public class MusicResource implements Resource<MusicDTO, Long> {
 
 
     @POST
-    @Override
-    public Response persist(MusicDTO dto) {
+    //@Override
+    public Response persist(@Valid final MusicDTO dto) {
 
         Music persisted = service.persist( MusicDTO.of( dto ) );
 
