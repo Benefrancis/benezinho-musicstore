@@ -26,6 +26,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
         final var jsonObject = Json.createObjectBuilder()
                 .add( "HOST", uriInfo.getAbsolutePath().getHost() )
                 .add( "RESOURCE", uriInfo.getAbsolutePath().getPath() )
+                .add( "TYPE", exception.getClass().getSimpleName() )
                 .add( "TITLE", "VALIDATION ERROR" );
 
         final var jsonArray = Json.createArrayBuilder();

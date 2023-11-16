@@ -23,6 +23,7 @@ public class ExceptionHandling implements ExceptionMapper<Exception> {
         final var jsonObject = Json.createObjectBuilder()
                 .add( "HOST", uriInfo.getAbsolutePath().getHost() )
                 .add( "RESOURCE", uriInfo.getAbsolutePath().getPath() )
+                .add( "TYPE", exception.getClass().getSimpleName() )
                 .add( "TITLE", "INTERNAL SERVER ERROR" );
 
         final var jsonArray = Json.createArrayBuilder();

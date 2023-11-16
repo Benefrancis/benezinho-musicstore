@@ -34,7 +34,7 @@ public class MusicResource implements Resource<MusicDTO, Long> {
     @Override
     public Response findById(@PathParam("id") Long id) {
         Music entity = service.findById( id );
-        if (Objects.isNull( entity )) throw new RuntimeException( "Não foi possível consultar o artista com id: " + id );
+        if (Objects.isNull( entity )) throw new NotFoundException( "Não foi possível consultar o artista com id: " + id );
         return Response.ok( MusicDTO.of( entity ) ).build();
     }
 

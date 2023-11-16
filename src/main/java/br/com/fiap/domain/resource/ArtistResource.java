@@ -34,7 +34,7 @@ public class ArtistResource implements Resource<ArtistDTO, Long> {
     @Override
     public Response findById(@PathParam("id") Long id) {
         Artist entity = service.findById( id );
-        if (Objects.isNull( entity )) throw new RuntimeException( "Não temos artista cadastrado com o id: " + id );
+        if (Objects.isNull( entity )) throw new NotFoundException( "Não temos artista cadastrado com o id: " + id );
         return Response.ok( ArtistDTO.of( entity ) ).build();
     }
 
